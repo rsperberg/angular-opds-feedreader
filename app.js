@@ -78,7 +78,12 @@ function FeedCtrl($scope, FeedService) {
 
     function loadDefaultFeeds() {
         $scope.allFeeds = [{titleText:'Load (from textbox)',url:''},
-            {titleText:'FeedBooks',url:'http://www.feedbooks.com/catalog.atom'},
+            {titleText:'FeedBooks All',url:'http://www.feedbooks.com/catalog.atom'},
+            {titleText:'FeedBooks Fiction',url:'http://www.feedbooks.com/store/categories/FBFIC000000.atom'},
+            {titleText:'FeedBooks Non-fiction',url:'http://www.feedbooks.com/store/categories/FBNFC000000.atom'},
+            {titleText:'FeedBooks Free Books',url:'http://www.feedbooks.com/site/free_books.atom'},
+            {titleText:'FeedBooks Bestsellers',url:'http://www.feedbooks.com/store/top.atom'},
+            {titleText:'FeedBooks New Releases',url:'http://www.feedbooks.com/store/recent.atom'},
             {titleText:'CodeProject C#',url:'http://www.codeproject.com/webservices/articlerss.aspx?cat=3'},
             {titleText:'TechCrunch',url:'http://feeds.feedburner.com/TechCrunch'}
             ];
