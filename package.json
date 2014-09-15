@@ -1,7 +1,12 @@
 {
   "name": "angular-opds-feedreader",
   "version": "1.0.0",
+  "description": "A feedreader for OPDS catalogs (books) written in AngularJS",
   "scripts": {
     "start": "ws"
+   },
+  "repository": {
+      "type" : "git",
+      "url" : "http://github.com/rsperberg/angular-opds-feedreader.git"
   }
 }
