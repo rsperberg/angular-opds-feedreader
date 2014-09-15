@@ -1,0 +1,7 @@
+{
+  "name": "angular-opds-feedreader",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ws"
+  }
+}
