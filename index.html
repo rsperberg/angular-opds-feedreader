@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <!--  forked from http://www.codeproject.com/Articles/817417/FreedReadR-RSS-Reader-Created-With-AngularJS  -->
+    <title>OPDS Feedreader</title>
+    <!--  link href="../3rdPartyLibs/bootstrap3/css/bootstrap.css" rel="stylesheet" /  -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./bootstrap-theme-min.css" rel="stylesheet" />
+    <link href="./opds-feedreader.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="FeedRead">
+
+    <div data-ng-controller="FeedCtrl">
+        <h4>OPDS Feed Reader using AngularJS</h4>
+
+        <form class="form-horizontal col-md-12" role="form">
+            <div class = "row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="{{phMessage}}" data-ng-model="feedSrc" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">{{currentButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                <li ng-repeat="feed in allFeeds"><a href="#" ng-click="loadFeed($event,feed.url);">{{feed.titleText}}</a></li>
+                            </ul>
+                        </div> <!-- input-group-btn  -->
+                        <div class="input-group-btn">
+                            <button ng-click="saveFeed()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Save Feed To Your List" type="button"><span class="glyphicon glyphicon-save"></button>
+                        </div> <!-- input-group-btn  -->
+                        <div class="input-group-btn">
+                            <button ng-click="removeAllFeedsFromLocalStorage()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></button>
+                        </div> <!--  input-group-btn  -->
+                    </div> <!--  input-group  -->
+                </div> <!--  col-md-6  -->
+            </div> <!--  row  -->
+
+            <div class = "row top-buffer">
+                <div class="col-md-6" ng-show="feeds.length > 0">
+                    <div class="input-group">
+                        <input class="form-control col-md-8" type="text" placeholder="Search" data-ng-model="filterText" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" data-ng-click="clearText()">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div> <!-- /btn-group  -->
+                    </div> <!-- /input-group  -->
+                </div> <!--  col-md-6  -->
+            </div>< !--  row top-buffer  -->
+        </form>
+
+        <ul class="unstyled">
+            <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+            <li ng-repeat="feed in feeds | filter:filterText">
+                <h5><a href="{{feed.link}}" target="_blank"><span class="titleText" >{{feed.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{feed.publishedDate}}</span></h5>
+                <p class="text-left">{{feed.contentSnippet}}</p>
+            </li>
+        </ul>
+    </div>  <!--  data-ng-controller="FeedCtrl"  -->
+
+    <script src="app.js"></script>
+</body>
+</html>

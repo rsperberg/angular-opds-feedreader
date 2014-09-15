@@ -1,0 +1,18 @@
+/* main.css */
+@import url(http://fonts.googleapis.com/css?family=Share:400,400italic,700,700italic&subset=latin,latin-ext);
+*{
+    font-family:Share;
+}
+
+.small{
+    font-size:11px;
+}
+
+.titleText
+{
+	font-weight:900;
+}
+
+h4 { margin-left:15px;font-family: Share, arial; /* background-color:lightblue; */}
+
+.top-buffer { margin-top:5px; }
