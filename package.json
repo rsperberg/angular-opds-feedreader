@@ -4,9 +4,15 @@
   "description": "A feedreader for OPDS catalogs (books) written in AngularJS",
   "scripts": {
     "start": "ws"
-   },
+  },
   "repository": {
-      "type" : "git",
-      "url" : "http://github.com/rsperberg/angular-opds-feedreader.git"
-  }
+    "type": "git",
+    "url": "http://github.com/rsperberg/angular-opds-feedreader.git"
+  },
+  "devDependencies": {
+    "local-web-server": "^0.5.15"
+  },
+  "dependencies": {
+     "local-web-server": "^0.5.15"
+ }
 }
