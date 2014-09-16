@@ -1,0 +1,33 @@
+{
+  "name": "angular-opds-feedreader",
+  "version": "0.1.0",
+  "description": "An atom-based OPDS feedreader written in AngularJS",
+  "main": "app.js",
+  "scripts": {
+//    "start": "node index.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "express": "~3.4.x"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsperberg/angular-opds-feedreader.git"
+  },
+  "keywords": [
+    "opds",
+    "feedreader",
+    "angular"
+  ],
+  "author": "Roger Sperberg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rsperberg/angular-opds-feedreader/issues"
+  },
+  "homepage": "https://github.com/rsperberg/angular-opds-feedreader"
+}
+
+
