@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <!--  script src="https://code.jquery.com/jquery-2.1.1.min.js"></script  -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="icon" href="/favicon.ico" />
 </head>
 <body ng-app="FeedRead">
 
@@ -50,13 +51,13 @@
                         </div> <!-- /btn-group  -->
                     </div> <!-- /input-group  -->
                 </div> <!--  col-md-6  -->
-            </div>< !--  row top-buffer  -->
+            </div><!--  row top-buffer  -->
         </form>
 
         <ul class="unstyled">
             <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
             <li ng-repeat="entry in feeds | filter:filterText">
-                <h5><a href="{{entry.link}}" target="_blank"><span class="titleText" >{{entry.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.publishedDate}}</span></h5>
+                <h5><a ng-href="{{entry.link}}" target="_blank"><span class="titleText" >{{entry.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.publishedDate}}</span></h5>
                 <p class="text-left">{{entry.contentSnippet}}</p>
             </li>
         </ul>

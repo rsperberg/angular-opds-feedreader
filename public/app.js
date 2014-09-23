@@ -1,30 +1,57 @@
 // app.js
 // {titleText:'',url:''}
 
+/*
+var feedr = require('feedr').create({});
+
+var opdsfeeds = {
+    feedBooksAll:'http://www.feedbooks.com/catalog.atom',
+    feedBooksFiction:'http://www.feedbooks.com/store/categories/FBFIC000000.atom',
+    feedBooksNonfiction:'http://www.feedbooks.com/store/categories/FBNFC000000.atom',
+    feedBooksFree:'http://www.feedbooks.com/site/free_books.atom',
+    feedBooksBestsellers:'http://www.feedbooks.com/store/top.atom',
+    feedBooksNew:'http://www.feedbooks.com/store/recent.atom'
+};
+
+// Read a single feed
+var feedbooksinfo = feedr.readFeed(opdsfeeds.feedBooksAll, {}, function(err, data, headers){
+    console.log(err, data, headers);
+    console.log(feedbooksinfo);
+});
+*/
+
 var app = angular.module('FeedRead', []);
 
 app.factory('FeedService',function($http){
     return {
         parseFeed : function(url){
-        return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+//            console.log($http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)) );
+//            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+            return $http.jsonp(url);
         }
     };
 });
 
-app.controller('FeedCtrl', ['$scope','FeedService', FeedCtrl]);
+app.controller('FeedCtrl', ['$scope', '$http', 'FeedService', FeedCtrl]);
 
-function FeedCtrl($scope, FeedService) {
-    retrieveFromLocalStorage();
+
+
+function FeedCtrl($scope, $http, FeedService) {
+ $http.get('http://www.feedbooks.com/catalog.atom').success(function(res) {
+   $scope.feedbookAll = res;
+   console.log($scope.feedbookAll);
+});
+   retrieveFromLocalStorage();
     $scope.phMessage = 'Enter Feed URL';
-    $scope.currentButtonText=$scope.allFeeds[0].titleText;
-    $scope.loadFeed=function(e,url){
+    $scope.currentButtonText = $scope.allFeeds[0].titleText;
+    $scope.loadFeed = function(e,url){
         $scope.currentButtonText = angular.element(e.target).text();
         // empty out filter text from last time they put one in, because
         // when they hit a new feed it is confusing.
         $scope.filterText = '';
         console.log('loadFeed / click event fired');
 
-        if ($scope.currentButtonText == $scope.allFeeds[0].titleText) {
+        if ($scope.currentButtonText === $scope.allFeeds[0].titleText) {
             //console.log($scope.feedSrc);
             url = $scope.feedSrc;
         }
@@ -39,13 +66,17 @@ function FeedCtrl($scope, FeedService) {
         console.log('value of url: ' );
         console.log(url);
     FeedService.parseFeed(url).then(function(res) {
-        $scope.loadButtonText=angular.element(e.target).text();
-        $scope.feeds=res.data.responseData.feed.entries;
+        console.log(res);
+    });
+    FeedService.parseFeed(url).then(function(res) {
+        $scope.loadButtonText = angular.element(e.target).text();
+        $scope.feeds = res.data.responseData.feed.entries;
+        console.log($scope.feeds);
         });
-    }
-    $scope.clearText=function() {
+    };
+    $scope.clearText = function() {
         $scope.filterText = '';
-    }
+    };
 
     function saveToLocalStorage(feeds) {
       // Put the object into storage
@@ -78,6 +109,7 @@ function FeedCtrl($scope, FeedService) {
 
     function loadDefaultFeeds() {
         $scope.allFeeds = [{titleText:'Load (from textbox)',url:''},
+            {titleText:'The Register',url:'http://www.theregister.co.uk/software/headlines.atom'},
             {titleText:'FeedBooks All',url:'http://www.feedbooks.com/catalog.atom'},
             {titleText:'FeedBooks Fiction',url:'http://www.feedbooks.com/store/categories/FBFIC000000.atom'},
             {titleText:'FeedBooks Non-fiction',url:'http://www.feedbooks.com/store/categories/FBNFC000000.atom'},
@@ -96,15 +128,15 @@ function FeedCtrl($scope, FeedService) {
     }
 
     function saveFeed() {
-        console.log('feedSrc');
-        console.log($scope.feedSrc);
-        if ($scope.feedSrc === undefined || $scope.feedSrc == '') {
+//        console.log('feedSrc');
+//        console.log($scope.feedSrc);
+        if ($scope.feedSrc === undefined || $scope.feedSrc === '') {
             alert('Please provide a Feed URL and try again.');
             return;
         }
         var titleText = prompt('Please enter the feed title text', '');
         if (titleText != null) {
-            f = new feed(titleText, $scope.feedSrc);
+            var f = new feed(titleText, $scope.feedSrc);
             $scope.allFeeds.push(f);
             saveToLocalStorage($scope.allFeeds);
         }

@@ -4,12 +4,15 @@
     <!--  forked from http://www.codeproject.com/Articles/817417/FreedReadR-RSS-Reader-Created-With-AngularJS  -->
     <title>OPDS Feedreader</title>
     <!--  link href="../3rdPartyLibs/bootstrap3/css/bootstrap.css" rel="stylesheet" /  -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./bootstrap-theme-min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!--  link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"  -->
+    <link href="./bootstrap-theme.min.css" rel="stylesheet" />
     <link href="./opds-feedreader.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!--  script src="https://code.jquery.com/jquery-2.1.1.min.js"></script  -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="icon" href="/favicon.ico" />
 </head>
 <body ng-app="FeedRead">
 
@@ -24,7 +27,7 @@
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">{{currentButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li ng-repeat="feed in allFeeds"><a href="#" ng-click="loadFeed($event,feed.url);">{{feed.titleText}}</a></li>
+                                <li ng-repeat="item in allFeeds"><a href="#" ng-click="loadFeed($event,item.url);">{{item.titleText}}</a></li>
                             </ul>
                         </div> <!-- input-group-btn  -->
                         <div class="input-group-btn">
@@ -48,14 +51,17 @@
                         </div> <!-- /btn-group  -->
                     </div> <!-- /input-group  -->
                 </div> <!--  col-md-6  -->
-            </div>< !--  row top-buffer  -->
+            </div><!--  row top-buffer  -->
         </form>
 
         <ul class="unstyled">
             <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
-            <li ng-repeat="feed in feeds | filter:filterText">
-                <h5><a href="{{feed.link}}" target="_blank"><span class="titleText" >{{feed.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{feed.publishedDate}}</span></h5>
-                <p class="text-left">{{feed.contentSnippet}}</p>
+            <li ng-repeat="feed in feeds">
+                <h5>{{feed}}</h5>
+            </li>
+            <li ng-repeat="entry in feeds | filter:filterText">
+                <h5><a href="{{entry.link}}" target="_blank"><span class="titleText" >{{entry.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.publishedDate}}</span></h5>
+                <p class="text-left">{{entry.contentSnippet}}</p>
             </li>
         </ul>
     </div>  <!--  data-ng-controller="FeedCtrl"  -->

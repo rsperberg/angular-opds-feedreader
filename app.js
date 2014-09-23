@@ -1,11 +1,27 @@
 // app.js
 // {titleText:'',url:''}
-
+require('feedr');
+var feedr = require('feedr').create({  /* optional configuration */  });
 var app = angular.module('FeedRead', []);
+var opdsfeeds = {
+    feedBooksAll:'http://www.feedbooks.com/catalog.atom',
+    feedBooksFiction:'http://www.feedbooks.com/store/categories/FBFIC000000.atom',
+    feedBooksNonfiction:'http://www.feedbooks.com/store/categories/FBNFC000000.atom',
+    feedBooksFree:'http://www.feedbooks.com/site/free_books.atom',
+    feedBooksBestsellers:'http://www.feedbooks.com/store/top.atom',
+    feedBooksNew:'http://www.feedbooks.com/store/recent.atom'
+}
+
+// Read a single feed
+var feedbooksinfo = feedr.readFeed(opdsfeeds.feedBooksAll, {/* optional configuration */}, function(err, data, headers){
+    console.log(err, data, headers);
+    console.log(feedbooksinfo);
+});
 
 app.factory('FeedService',function($http){
     return {
         parseFeed : function(url){
+//            console.log($http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)) );
             return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
         }
     };
@@ -41,7 +57,8 @@ function FeedCtrl($scope, FeedService) {
     FeedService.parseFeed(url).then(function(res) {
         $scope.loadButtonText=angular.element(e.target).text();
         $scope.feeds=res.data.responseData.feed.entries;
-        });
+ //        console.log($scope.feeds);
+       });
     }
     $scope.clearText=function() {
         $scope.filterText = '';
@@ -97,8 +114,8 @@ function FeedCtrl($scope, FeedService) {
     }
 
     function saveFeed() {
-        console.log('feedSrc');
-        console.log($scope.feedSrc);
+ //       console.log('feedSrc');
+//        console.log($scope.feedSrc);
         if ($scope.feedSrc === undefined || $scope.feedSrc == '') {
             alert('Please provide a Feed URL and try again.');
             return;
