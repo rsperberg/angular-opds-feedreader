@@ -1,0 +1,24 @@
+{
+  "env": {
+      "node": true
+    },
+   "globals": {
+      "$": true,
+      "$()": true,
+      "document": true,
+      "window": true,
+      "angular": true,
+      "node": true,
+      "console": false,
+      "alert": false,
+      "$document": false,
+      "process": true
+    },
+   "rules": {
+      "quotes": [2, "single", "avoid-escape"],
+      "func-names": 0,
+      "func-style": [0, "declaration"],
+      "curly": [1, "all"],
+      "no-unused-vars": [2, {"vars": "local", "args": "none"}]
+    }
+}
