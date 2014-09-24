@@ -22,6 +22,7 @@
       "func-style": [0, "declaration"],
       "curly": [1, "all"],
       "no-unused-vars": [2, {"vars": "local", "args": "none"}],
-      "no-underscore-dangle": 0
+      "no-underscore-dangle": 0,
+      "no-alert": 0
     }
 }
