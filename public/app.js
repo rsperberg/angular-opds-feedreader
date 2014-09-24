@@ -1,6 +1,6 @@
 // app.js
 // {titleText:'',url:''}
-
+"use strict";
 /*
 var feedr = require('feedr').create({});
 
@@ -34,8 +34,6 @@ app.factory('FeedService',function($http){
 
 app.controller('FeedCtrl', ['$scope', '$http', 'FeedService', FeedCtrl]);
 
-
-
 function FeedCtrl($scope, $http, FeedService) {
  $http.get('http://www.feedbooks.com/catalog.atom').success(function(res) {
    $scope.feedbookAll = res;
@@ -65,7 +63,7 @@ function FeedCtrl($scope, $http, FeedService) {
         console.log('button text: ' + angular.element(e.target).text());
         console.log('value of url: ' );
         console.log(url);
-    FeedService.parseFeed(url).then(function(res) {
+    FeedService.parseOpdsFeed(url).then(function(res) {
         console.log(res);
     });
     FeedService.parseOpdsFeed(url).then(function(res) {
