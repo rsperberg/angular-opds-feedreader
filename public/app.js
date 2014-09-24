@@ -24,7 +24,7 @@ var app = angular.module('FeedRead', []);
 
 app.factory('FeedService',function($http){
     return {
-        parseFeed : function(url){
+        parseOpdsFeed : function(url){
 //            console.log($http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)) );
 //            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
             return $http.jsonp(url);
@@ -68,7 +68,7 @@ function FeedCtrl($scope, $http, FeedService) {
     FeedService.parseFeed(url).then(function(res) {
         console.log(res);
     });
-    FeedService.parseFeed(url).then(function(res) {
+    FeedService.parseOpdsFeed(url).then(function(res) {
         $scope.loadButtonText = angular.element(e.target).text();
         $scope.feeds = res.data.responseData.feed.entries;
         console.log($scope.feeds);
