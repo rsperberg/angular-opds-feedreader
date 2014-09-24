@@ -12,7 +12,9 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <!--  script src="https://code.jquery.com/jquery-2.1.1.min.js"></script  -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="icon" href="/favicon.ico" />
+    <script src="js/jLoader.js"></script>
+    <script src="js/xml2json.js"></script>
+   <link rel="icon" href="/favicon.ico" />
 </head>
 <body ng-app="FeedRead">
 
@@ -60,8 +62,8 @@
                 <h5>{{feed}}</h5>
             </li>
             <li ng-repeat="entry in feeds | filter:filterText">
-                <h5><a href="{{entry.link}}" target="_blank"><span class="titleText" >{{entry.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.publishedDate}}</span></h5>
-                <p class="text-left">{{entry.contentSnippet}}</p>
+                <h5><a href="{{entry.link}}" target="_blank"><span class="titleText" >{{entry.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.updated}}</span></h5>
+                <p class="text-left">{{entry.content}}</p>
             </li>
         </ul>
     </div>  <!--  data-ng-controller="FeedCtrl"  -->
