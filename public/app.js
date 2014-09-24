@@ -1,6 +1,7 @@
+/*global jLoader xml2json*/
 // app.js
 // {titleText:'',url:''}
-"use strict";
+'use strict';
 /*
 var feedr = require('feedr').create({});
 
@@ -22,9 +23,24 @@ var feedbooksinfo = feedr.readFeed(opdsfeeds.feedBooksAll, {}, function(err, dat
 
 var app = angular.module('FeedRead', []);
 
-app.factory('FeedService',function($http){
+app.factory('FeedService',function($http) {
     return {
-        parseOpdsFeed : function(url){
+        parseOpdsFeed : function(feedUrl) {
+
+                jLoader.ajax({
+                    url: feedUrl,
+                    success: function (xml) {
+                        var jsonified = xml2json.parse(xml);
+
+                        console.log(jsonified);
+                        console.log(jsonified.feed.entry[0].title._text);
+                        console.log(jsonified.feed.entry[0].link._attr.type);
+                        console.log(jsonified.feed.entry[0].updated._text);
+                        console.log(jsonified.feed.entry[0].id._text);
+                        console.log(JSON.stringify(jsonified));
+                    }
+                });
+
 //            console.log($http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)) );
 //            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
             return $http.jsonp(url);
