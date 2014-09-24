@@ -2,5 +2,6 @@ node_modules
 public/main.js
 public/main.html
 notes
-
-
+public/js
+public/catalog.atom
+public/demo-mod.html
