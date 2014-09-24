@@ -12,13 +12,16 @@
       "console": false,
       "alert": false,
       "$document": false,
-      "process": true
+      "process": true,
+      "XMLHttpRequest": true,
+      "DOMParser": true
     },
    "rules": {
       "quotes": [2, "single", "avoid-escape"],
       "func-names": 0,
       "func-style": [0, "declaration"],
       "curly": [1, "all"],
-      "no-unused-vars": [2, {"vars": "local", "args": "none"}]
+      "no-unused-vars": [2, {"vars": "local", "args": "none"}],
+      "no-underscore-dangle": 0
     }
 }
