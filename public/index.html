@@ -23,7 +23,7 @@
 
         <form class="form-horizontal col-md-12" role="form">
             <div class = "row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="{{phMessage}}" data-ng-model="feedSrc" />
                         <div class="input-group-btn">
@@ -43,7 +43,7 @@
             </div> <!--  row  -->
 
             <div class = "row top-buffer">
-                <div class="col-md-6" ng-show="feeds.length > 0">
+                <div class="col-md-4" ng-show="feeds.length > 0">
                     <div class="input-group">
                         <input class="form-control col-md-8" type="text" placeholder="Search" data-ng-model="filterText" />
                         <div class="input-group-btn">
@@ -52,17 +52,19 @@
                             </button>
                         </div> <!-- /btn-group  -->
                     </div> <!-- /input-group  -->
-                </div> <!--  col-md-6  -->
+                </div> <!--  col-md-4  -->
             </div><!--  row top-buffer  -->
         </form>
 
-        <ul class="unstyled">
-            <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
-            <li ng-repeat="item in feeds | filter:filterText">
-                <h5><a href="{{item.link._attr.href}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span></h5>
-                <p class="text-left">{{item.content._text}} {{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
-            </li>
-        </ul>
+        <div class="col-md-4">
+            <ul class="unstyled">
+                <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+                <li ng-repeat="item in feeds | filter:filterText" class="ruled">
+                    <h5><a href="{{item.link._attr.href}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span></h5>
+                    <p class="text-left">{{item.content._text}} {{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
+                </li>
+            </ul>
+        </div> <!--  col-md-4  -->
     </div>  <!--  data-ng-controller="FeedCtrl"  -->
 
     <script src="app.js"></script>
