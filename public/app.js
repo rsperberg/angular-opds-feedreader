@@ -26,35 +26,29 @@ var app = angular.module('FeedRead', []);
 app.factory('FeedService',function($http) {
     return {
         parseOpdsFeed : function(feedUrl) {
-
-                jLoader.ajax({
-                    url: feedUrl,
-                    success: function (xml) {
-                        var jsonified = xml2json.parse(xml);
-
-                        console.log(jsonified);
-                        console.log(jsonified.feed.entry[0].title._text);
-                        console.log(jsonified.feed.entry[0].link._attr.type);
-                        console.log(jsonified.feed.entry[0].updated._text);
-                        console.log(jsonified.feed.entry[0].id._text);
-                        console.log(JSON.stringify(jsonified));
-                    }
-                });
+               return  $http.get(feedUrl).then(function(res) {
+                //console.log(res);
+ //                   $scope.xmlfeed = res;
+                    var jsonfeed = xml2json.parseTheXml(res.data);
+                    return jsonfeed;
+            } ); // get
 
 //            console.log($http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)) );
 //            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
-            return $http.jsonp(url);
-        }
-    };
-});
+
+        }  // parseOpdsFeed
+    };  // return
+});  // app.factory
 
 app.controller('FeedCtrl', ['$scope', '$http', 'FeedService', FeedCtrl]);
 
 function FeedCtrl($scope, $http, FeedService) {
+    /*
  $http.get('http://www.feedbooks.com/catalog.atom').success(function(res) {
    $scope.feedbookAll = res;
-   console.log($scope.feedbookAll);
-});
+   console.log('retrieved from feedbooks.com/catalog.atom: ',$scope.feedbookAll);
+});   */
+
    retrieveFromLocalStorage();
     $scope.phMessage = 'Enter Feed URL';
     $scope.currentButtonText = $scope.allFeeds[0].titleText;
@@ -70,22 +64,22 @@ function FeedCtrl($scope, $http, FeedService) {
             url = $scope.feedSrc;
         }
 
-
         $scope.feedSrc = url;
         if (url === undefined || url === '') {
             $scope.phMessage = 'Please enter a valid Feed URL & try again.';
             return;
         }
         console.log('button text: ' + angular.element(e.target).text());
-        console.log('value of url: ' );
+        console.log('value of url is (on next line): ' );
         console.log(url);
+//    FeedService.parseOpdsFeed(url).then(function(res) {
+//        console.log(res);
+//    });
     FeedService.parseOpdsFeed(url).then(function(res) {
-        console.log(res);
-    });
-    FeedService.parseOpdsFeed(url).then(function(res) {
+        console.log('res from parseOpdsFeed is: ', res)
         $scope.loadButtonText = angular.element(e.target).text();
-        $scope.feeds = res.data.responseData.feed.entries;
-        console.log($scope.feeds);
+        $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
+        console.log('$scope.feeds is: ', $scope.feeds);
         });
     };
     $scope.clearText = function() {
@@ -105,7 +99,7 @@ function FeedCtrl($scope, $http, FeedService) {
         console.log('retrieving localStorage...');
         try {
             $scope.allFeeds = JSON.parse(localStorage['feeds']);
-            console.log($scope.allFeeds.length);
+            console.log('feeds length is: ',$scope.allFeeds.length);
 
             // console.log(JSON.stringify($scope.allFeeds));
             if ($scope.allFeeds === null)
@@ -123,15 +117,12 @@ function FeedCtrl($scope, $http, FeedService) {
 
     function loadDefaultFeeds() {
         $scope.allFeeds = [{titleText:'Load (from textbox)',url:''},
-            {titleText:'The Register',url:'http://www.theregister.co.uk/software/headlines.atom'},
             {titleText:'FeedBooks All',url:'http://www.feedbooks.com/catalog.atom'},
             {titleText:'FeedBooks Fiction',url:'http://www.feedbooks.com/store/categories/FBFIC000000.atom'},
             {titleText:'FeedBooks Non-fiction',url:'http://www.feedbooks.com/store/categories/FBNFC000000.atom'},
             {titleText:'FeedBooks Free Books',url:'http://www.feedbooks.com/site/free_books.atom'},
             {titleText:'FeedBooks Bestsellers',url:'http://www.feedbooks.com/store/top.atom'},
-            {titleText:'FeedBooks New Releases',url:'http://www.feedbooks.com/store/recent.atom'},
-            {titleText:'CodeProject C#',url:'http://www.codeproject.com/webservices/articlerss.aspx?cat=3'},
-            {titleText:'TechCrunch',url:'http://feeds.feedburner.com/TechCrunch'}
+            {titleText:'FeedBooks New Releases',url:'http://www.feedbooks.com/store/recent.atom'}
             ];
     }
     $scope.removeAllFeedsFromLocalStorage = removeAllFeedsFromLocalStorage;
