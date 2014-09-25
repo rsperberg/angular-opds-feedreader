@@ -12,8 +12,8 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <!--  script src="https://code.jquery.com/jquery-2.1.1.min.js"></script  -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="js/jLoader.js"></script>
-    <script src="js/xml2json.js"></script>
+    <!--  script src="js/jLoader.js"  type="text/javascript"></script  -->
+    <script src="js/xml2json.js"  type="text/javascript"></script>
    <link rel="icon" href="/favicon.ico" />
 </head>
 <body ng-app="FeedRead">
@@ -58,12 +58,9 @@
 
         <ul class="unstyled">
             <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
-            <li ng-repeat="feed in feeds">
-                <h5>{{feed}}</h5>
-            </li>
-            <li ng-repeat="entry in feeds | filter:filterText">
-                <h5><a href="{{entry.link}}" target="_blank"><span class="titleText" >{{entry.title}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{entry.updated}}</span></h5>
-                <p class="text-left">{{entry.content}}</p>
+            <li ng-repeat="item in feeds | filter:filterText">
+                <h5><a href="{{item.link._attr.href}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span></h5>
+                <p class="text-left">{{item.content._text}} {{item.summary._text}}</p>
             </li>
         </ul>
     </div>  <!--  data-ng-controller="FeedCtrl"  -->
