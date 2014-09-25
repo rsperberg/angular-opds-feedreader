@@ -21,10 +21,14 @@ li.ruled { margin-top: 10pt; border-top: 1px solid #d8d8ff;}
 
 li { list-style-type: none; }
 
-a { color: #4274ca; }  /* bootstrap.min has #428bca  */
+a, a[href] { color: #4274ca; }  /* bootstrap.min has #428bca  */
+
+a:hover, a:focus { color:#ca4274; text-decoration: none !important;  border-bottom: 0;}
 
 .btn-info { background-image: linear-gradient(to bottom,#4274ca 0,#305ca9 100%);  border-color: #305ca9;  background-color: #305ca9;  }   /* bootstrap has linear-gradient(to bottom,#5bc0de 0,#2aabd2 100%)   */
 
 .btn-info:hover, .btn-info:focus { background-color: #305ca9; border-color:#3567bd;}
 
 .open .dropdown-toggle.btn-info { background-color: #4274ca; border-color: #3567bd; }
+
+.badge { background-color: #4274ca; font-family: Share-Bold; }
