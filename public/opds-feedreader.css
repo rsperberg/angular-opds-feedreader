@@ -17,7 +17,7 @@ h4 { margin-left:15px;font-family: Share, arial; /* background-color:lightblue; 
 
 .top-buffer { margin-top:5px; }
 
-li.ruled { margin-top: 10pt; border-top: 1px solid #d8d8ff;}
+li.ruled { margin-top: 6pt; border-top: 1px solid #d8d8ff;}
 
 li { list-style-type: none; }
 
@@ -32,3 +32,5 @@ a:hover, a:focus { color:#ca4274; text-decoration: none !important;  border-bott
 .open .dropdown-toggle.btn-info { background-color: #4274ca; border-color: #3567bd; }
 
 .badge { background-color: #4274ca; font-family: Share-Bold; }
+
+img { padding-top: 6pt;}
