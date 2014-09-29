@@ -79,7 +79,9 @@ function FeedCtrl($scope, $http, FeedService) {
         console.log('res from parseOpdsFeed is: ', res)
         $scope.loadButtonText = angular.element(e.target).text();
         $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
+        $scope.images = res.feed.entry.link;
         console.log('$scope.feeds is: ', $scope.feeds);
+        console.log('$scope.images is: ', $scope.images);
         });
     };
     $scope.clearText = function() {
