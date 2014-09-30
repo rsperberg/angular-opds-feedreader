@@ -21,11 +21,16 @@ var feedbooksinfo = feedr.readFeed(opdsfeeds.feedBooksAll, {}, function(err, dat
 });
 */
 
+// from https://github.com/ftlabs/fastclick -- used to enable touch selection in dropdown menu on iOS devices
+window.addEventListener('load', function() {
+    FastClick.attach(document.body);
+}, false);
+
 var app = angular.module('FeedRead', ['ngTouch']);
 
 app.factory('FeedService',function($http) {
     return {
-        parseOpdsFeed : function(feedUrl) {
+        parseOpdsFeed: function(feedUrl) {
                return  $http.get(feedUrl).then(function(res) {
                 //console.log(res);
  //                   $scope.xmlfeed = res;
@@ -43,22 +48,18 @@ app.factory('FeedService',function($http) {
 app.controller('FeedCtrl', ['$scope', '$http', 'FeedService', FeedCtrl]);
 
 function FeedCtrl($scope, $http, FeedService) {
-    /*
- $http.get('http://www.feedbooks.com/catalog.atom').success(function(res) {
-   $scope.feedbookAll = res;
-   console.log('retrieved from feedbooks.com/catalog.atom: ',$scope.feedbookAll);
-});   */
-
    retrieveFromLocalStorage();
     $scope.phMessage = 'Enter Feed URL';
     $scope.currentButtonText = $scope.allFeeds[0].titleText;
+
     $scope.loadFeed = function(e,url){
         $scope.currentButtonText = angular.element(e.target).text();
-        // empty out filter text from last time they put one in, because
+        // empty out search filter text from last time they put one in, because
         // when they hit a new feed it is confusing.
         $scope.filterText = '';
         console.log('loadFeed / click event fired');
 
+        // when button is labeled 'load (from textbox)', set the url to what's in the textbox
         if ($scope.currentButtonText === $scope.allFeeds[0].titleText) {
             //console.log($scope.feedSrc);
             url = $scope.feedSrc;
@@ -72,16 +73,14 @@ function FeedCtrl($scope, $http, FeedService) {
         console.log('button text: ' + angular.element(e.target).text());
         console.log('value of url is (on next line): ' );
         console.log(url);
-//    FeedService.parseOpdsFeed(url).then(function(res) {
-//        console.log(res);
-//    });
-    FeedService.parseOpdsFeed(url).then(function(res) {
-        console.log('res from parseOpdsFeed is: ', res)
-        $scope.currentButtonText = angular.element(e.target).text();
-        $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
-        $scope.images = res.feed.entry.link;
-        console.log('$scope.feeds is: ', $scope.feeds);
-        console.log('$scope.images is: ', $scope.images);
+
+        FeedService.parseOpdsFeed(url).then(function(res) {
+            console.log('res from parseOpdsFeed is: ', res)
+            $scope.currentButtonText = angular.element(e.target).text();
+            $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
+            $scope.images = res.feed.entry.link;
+            console.log('$scope.feeds is: ', $scope.feeds);
+            console.log('$scope.images is: ', $scope.images);
         });
     };
     $scope.clearText = function() {
