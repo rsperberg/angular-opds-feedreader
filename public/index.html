@@ -30,7 +30,7 @@
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">{{currentButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li data-ng-repeat="item in allFeeds"><a data-ng-click="loadFeed($event,item.url);">{{item.titleText}}</a></li>
+                                <li data-ng-repeat="item in allFeeds"><a dropdown-toggle data-ng-click="loadFeed($event,item.url);">{{item.titleText}}</a></li>
                             </ul>
                         </div> <!-- input-group-btn  -->
                         <div class="input-group-btn">
