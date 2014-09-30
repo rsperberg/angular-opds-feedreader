@@ -17,7 +17,7 @@
     <script src="js/xml2json.js"  type="text/javascript"></script>
    <link rel="icon" href="/favicon.ico" />
 </head>
-<body ng-app="FeedRead">
+<body data-ng-app="FeedRead">
 
     <div data-ng-controller="FeedCtrl">
         <h4>OPDS Catalog Reader using AngularJS</h4>
@@ -30,14 +30,14 @@
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">{{currentButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li ng-repeat="item in allFeeds"><a href="#" ng-click="loadFeed($event,item.url);">{{item.titleText}}</a></li>
+                                <li data-ng-repeat="item in allFeeds"><a ng-href="#" data-ng-click="loadFeed($event,item.url);">{{item.titleText}}</a></li>
                             </ul>
                         </div> <!-- input-group-btn  -->
                         <div class="input-group-btn">
-                            <button ng-click="saveFeed()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Save Feed To Your List" type="button"><span class="glyphicon glyphicon-save"></button>
+                            <button data-ng-click="saveFeed()" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Save Feed To Your List" type="button"><span class="glyphicon glyphicon-save"></button>
                         </div> <!-- input-group-btn  -->
                         <div class="input-group-btn">
-                            <button ng-click="removeAllFeedsFromLocalStorage()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></button>
+                            <button data-ng-click="removeAllFeedsFromLocalStorage()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></button>
                         </div> <!--  input-group-btn  -->
                     </div> <!--  input-group  -->
                 </div> <!--  col-md-6  -->
@@ -59,41 +59,41 @@
 
         <div class="col-md-4">
             <ul class="unstyled">
-                <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
-                <span ng-repeat="link in links">
-                    <span class="badge badge-warning top-buffer badgelink" ng-if="link._attr.rel === 'previous'" /><a href="" ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
-                    <span class="badge badge-warning top-buffer badgelink" ng-if="link._attr.rel === 'next'" /><a href="" ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                <span class="badge badge-warning top-buffer" data-ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+                <span data-ng-repeat="link in links">
+                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'" /><a ng-href="" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'" /><a ng-href="" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
                 </span>
 
-                <li ng-repeat="item in feeds | filter:filterText" class="ruled">
+                <li data-ng-repeat="item in feeds | filter:filterText" class="ruled">
 
-                    <div ng-switch on="item.link._attr.rel"> <!-- do not give space to image for links to subsection listings  -->
-                        <div ng-switch-when="http://opds-spec.org/sort/popular"> <!-- best sellers  -->
+                    <div data-ng-switch on="item.link._attr.rel"> <!-- do not give space to image for links to subsection listings  -->
+                        <div data-ng-switch-when="http://opds-spec.org/sort/popular"> <!-- best sellers  -->
                             <h5>
-                                <a href="" ng-click="loadSubFeed(event,item.link._attr.href,item.title._text)"><span class="titleText" >{{item.title._text}}</span></a>
+                                <a ng-href="" data-ng-click="loadSubFeed(event,item.link._attr.href,item.title._text)"><span class="titleText" >{{item.title._text}}</span></a>
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
                             <p class="text-left">{{item.content._text}}</p>
                         </div>
-                        <div ng-switch-when="http://opds-spec.org/sort/new">  <!--  New releases -->
+                        <div data-ng-switch-when="http://opds-spec.org/sort/new">  <!--  New releases -->
                             <h5>
                                 <a ng-href="{{item.id._text}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a>
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
                             <p class="text-left">{{item.content._text}}</p>
                         </div>
-                        <div ng-switch-when="subsection">
+                        <div data-ng-switch-when="subsection">
                             <h5>
-                                <a href="" target="_blank"><span class="titleText" ng-click="loadSubFeed(event,item.link._attr.href, item.title._text)">{{item.title._text}}</span></a>
+                                <a ng-href="" target="_blank"><span class="titleText" data-ng-click="loadSubFeed(event,item.link._attr.href, item.title._text)">{{item.title._text}}</span></a>
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
                             <p class="text-left">{{item.content._text}} </p>
                         </div>
-                        <div ng-switch-default>
+                        <div data-ng-switch-default>
                             <div class="row">
                                 <div class="col-md-2">
-                                    <div ng-repeat="entrylinks in item.link">
-                                        <img ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" src="{{entrylinks._attr.href}}" />
+                                    <div data-ng-repeat="entrylinks in item.link">
+                                        <img data-ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" src="{{entrylinks._attr.href}}" />
                                     </div>
                                 </div>
                                  <div class="col-md-10">
@@ -102,8 +102,8 @@
                                         <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                                     </h5>
                                     <p class="text-left">{{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
-                                    <div ng-repeat="entrylinks in item.link">
-                                        <p><a  ng-if="entrylinks._attr.title === 'View on Feedbooks'" href="{{entrylinks._attr.href}}" target="_blank"><span class="titleText" >View on Feedbooks</span></a></p>
+                                    <div data-ng-repeat="entrylinks in item.link">
+                                        <p><a data-ng-if="entrylinks._attr.title === 'View on Feedbooks'" ng-href="{{entrylinks._attr.href}}" target="_blank"><span class="titleText" >View on Feedbooks</span></a></p>
                                     </div>
                                 </div>
                           </div>  <!--  row  -->
