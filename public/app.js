@@ -96,6 +96,7 @@ function FeedCtrl($scope, $http, FeedService) {
         FeedService.parseOpdsFeed(url).then(function(res) {
             console.log('res from parseOpdsFeed is: ', res)
             $scope.currentButtonText = subFeedTitle;
+            $scope.main = res.feed;
             $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
             $scope.images = res.feed.entry.link;
             $scope.links = res.feed.link;
