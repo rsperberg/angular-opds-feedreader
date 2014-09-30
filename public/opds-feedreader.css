@@ -34,3 +34,7 @@ a:hover, a:focus { color:#ca4274; text-decoration: none !important;  border-bott
 .badge { background-color: #4274ca; font-family: Share-Bold; }
 
 img { padding-top: 6pt;}
+
+.badgelink, .badgelink:visited, badgelink:hover, badgelink:focus, badgelink:active {text-decoration: none !important;}
+
+.badgelink:hover, badgelink:focus { background-color: #ca4274ca; }
