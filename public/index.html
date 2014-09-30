@@ -30,7 +30,7 @@
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">{{currentButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li data-ng-repeat="item in allFeeds"><span dropdown-toggle data-ng-click="loadFeed($event,item.url);">{{item.titleText}}</span></li>
+                                <li data-ng-repeat="item in allFeeds"><span ng-href="" dropdown-toggle data-ng-click="loadFeed($event,item.url);">{{item.titleText}}</span></li>
                             </ul>
                         </div> <!-- input-group-btn  -->
                         <div class="input-group-btn">
@@ -61,8 +61,8 @@
             <ul class="unstyled">
                 <span class="badge badge-warning top-buffer" data-ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
                 <span data-ng-repeat="link in links">
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'" /><a data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'" /><a data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'" /><a ng-href="" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'" /><a ng-href="" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
                 </span>
 
                 <li data-ng-repeat="item in feeds | filter:filterText" class="ruled">
@@ -84,7 +84,7 @@
                         </div>
                         <div data-ng-switch-when="subsection">
                             <h5>
-                                <a ng-href="" target="_blank"><span class="titleText" data-ng-click="loadSubFeed(event,item.link._attr.href, item.title._text)">{{item.title._text}}</span></a>
+                                <a ng-href="" data-ng-click="loadSubFeed(event,item.link._attr.href, item.title._text)"><span class="titleText">{{item.title._text}}</span></a>
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
                             <p class="text-left">{{item.content._text}} </p>
