@@ -40,3 +40,5 @@ img { padding-top: 6pt;}
 .badgelink:visited, .badgelink:hover, .badgelink:focus, .badgelink:active { text-decoration: none !important; color: white; }
 
 .badgelink:hover, .badgelink:focus, a.badgelink:hover, a.badgelink:focus, span.badge a.badgelink:hover,  span.badge a.badgelink:focus, span.badge a:hover,  span.badge a:focus { background-color: #ca4274 !important; color: white; }
+
+[ng-click], [data-ng-click], [x-ng-click] { cursor: pointer; }
