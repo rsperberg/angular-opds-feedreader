@@ -19,7 +19,7 @@
 <body ng-app="FeedRead">
 
     <div data-ng-controller="FeedCtrl">
-        <h4>OPDS Feed Reader using AngularJS</h4>
+        <h4>OPDS Catalog Reader using AngularJS</h4>
 
         <form class="form-horizontal col-md-12" role="form">
             <div class = "row">
@@ -59,18 +59,55 @@
         <div class="col-md-4">
             <ul class="unstyled">
                 <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+                <span ng-repeat="link in links">
+                    <span class="badge badge-warning top-buffer" ng-if="link._attr.rel === 'previous'" src="{{links._attr.href}}" />&nbsp; &nbsp;{{links._attr.title}}</span>
+                    <span class="badge badge-warning top-buffer" ng-if="link._attr.rel === 'next'" src="{{links._attr.href}}" />&nbsp; &nbsp;{{links._attr.title}}</span>
+                </span>
+
                 <li ng-repeat="item in feeds | filter:filterText" class="ruled">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div ng-repeat="links in item.link">
-                          <img ng-if="links._attr.rel === 'http://opds-spec.org/image/thumbnail'" src="{{links._attr.href}}" />
+
+                    <div ng-switch on="item.link._attr.rel"> <!-- do not give space to image for links to subsection listings  -->
+                        <div ng-switch-when="http://opds-spec.org/sort/popular"> <!-- best sellers  -->
+                            <h5>
+                                <a href="" ng-click="loadSubFeed(event,item.link._attr.href,item.title._text)"><span class="titleText" >{{item.title._text}}</span></a>
+                                <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
+                            </h5>
+                            <p class="text-left">{{item.content._text}}</p>
                         </div>
-                    </div>
-                    <div class="col-md-10">
-                        <h5><a href="{{item.link._attr.href}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a><span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span></h5>
-                        <p class="text-left">{{item.content._text}} {{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
-                    </div>
-              </div>
+                        <div ng-switch-when="http://opds-spec.org/sort/new">  <!--  New releases -->
+                            <h5>
+                                <a ng-href="{{item.id._text}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a>
+                                <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
+                            </h5>
+                            <p class="text-left">{{item.content._text}}</p>
+                        </div>
+                        <div ng-switch-when="subsection">
+                            <h5>
+                                <a href="" target="_blank"><span class="titleText" ng-click="loadSubFeed(event,item.link._attr.href, item.title._text)">{{item.title._text}}</span></a>
+                                <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
+                            </h5>
+                            <p class="text-left">{{item.content._text}} </p>
+                        </div>
+                        <div ng-switch-default>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div ng-repeat="entrylinks in item.link">
+                                        <img ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" src="{{entrylinks._attr.href}}" />
+                                    </div>
+                                </div>
+                                 <div class="col-md-10">
+                                    <h5>
+                                        <span class="titleText">{{item.title._text}}</span>
+                                        <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
+                                    </h5>
+                                    <p class="text-left">{{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
+                                    <div ng-repeat="entrylinks in item.link">
+                                        <p><a  ng-if="entrylinks._attr.title === 'View on Feedbooks'" href="{{entrylinks._attr.href}}" target="_blank"><span class="titleText" >View on Feedbooks</span></a></p>
+                                    </div>
+                                </div>
+                          </div>  <!--  row  -->
+                       </div>
+                    </div>  <!--  on  -->
               </li>
             </ul>
         </div> <!--  col-md-4  -->
