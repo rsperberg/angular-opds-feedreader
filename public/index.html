@@ -60,8 +60,8 @@
             <ul class="unstyled">
                 <span class="badge badge-warning top-buffer" ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
                 <span ng-repeat="link in links">
-                    <span class="badge badge-warning top-buffer" ng-if="link._attr.rel === 'previous'" src="{{links._attr.href}}" />&nbsp; &nbsp;{{links._attr.title}}</span>
-                    <span class="badge badge-warning top-buffer" ng-if="link._attr.rel === 'next'" src="{{links._attr.href}}" />&nbsp; &nbsp;{{links._attr.title}}</span>
+                    <span class="badge badge-warning top-buffer badgelink" ng-if="link._attr.rel === 'previous'" /><a href="{{link._attr.href}}" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink" ng-if="link._attr.rel === 'next'" /><a href="{{link._attr.href}}" class="badgelink">{{link._attr.title}}</a></span>
                 </span>
 
                 <li ng-repeat="item in feeds | filter:filterText" class="ruled">
