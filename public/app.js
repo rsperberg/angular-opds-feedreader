@@ -77,7 +77,7 @@ function FeedCtrl($scope, $http, FeedService) {
 //    });
     FeedService.parseOpdsFeed(url).then(function(res) {
         console.log('res from parseOpdsFeed is: ', res)
-        $scope.loadButtonText = angular.element(e.target).text();
+        $scope.currentButtonText = angular.element(e.target).text();
         $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
         $scope.images = res.feed.entry.link;
         console.log('$scope.feeds is: ', $scope.feeds);
@@ -87,6 +87,24 @@ function FeedCtrl($scope, $http, FeedService) {
     $scope.clearText = function() {
         $scope.filterText = '';
     };
+
+    function loadSubFeed(e,url, subFeedTitle) {
+        $scope.filterText = '';
+        $scope.phMessage = url;
+        $scope.feedSrc = url;
+        //console.log(url);
+        FeedService.parseOpdsFeed(url).then(function(res) {
+            console.log('res from parseOpdsFeed is: ', res)
+            $scope.currentButtonText = subFeedTitle;
+            $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
+            $scope.images = res.feed.entry.link;
+            $scope.links = res.feed.link;
+            console.log('$scope.feeds is: ', $scope.feeds);
+            console.log('$scope.images is: ', $scope.images);
+        });
+   }
+
+   $scope.loadSubFeed = loadSubFeed;
 
     function saveToLocalStorage(feeds) {
       // Put the object into storage
