@@ -21,7 +21,7 @@ var feedbooksinfo = feedr.readFeed(opdsfeeds.feedBooksAll, {}, function(err, dat
 });
 */
 
-var app = angular.module('FeedRead', []);
+var app = angular.module('FeedRead', ['ngTouch']);
 
 app.factory('FeedService',function($http) {
     return {
