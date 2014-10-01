@@ -78,7 +78,8 @@
                         </div>
                         <div data-ng-switch-when="http://opds-spec.org/sort/new">  <!--  New releases -->
                             <h5>
-                                <a ng-href="{{item.id._text}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a>
+                                <a ng-href="" data-ng-click="loadSubFeed(event,item.id._text, item.title._text)"><span class="titleText">{{item.title._text}}</span></a>
+                                <!--  a ng-href="{{item.id._text}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a  -->
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
                             <p class="text-left">{{item.content._text}}</p>
@@ -94,7 +95,7 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <div data-ng-repeat="entrylinks in item.link">
-                                        <img data-ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" src="{{entrylinks._attr.href}}" />
+                                        <img data-ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" data-ng-src="{{entrylinks._attr.href}}" />
                                     </div>
                                 </div>
                                  <div class="col-md-10">
