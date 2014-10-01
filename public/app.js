@@ -35,6 +35,7 @@ app.factory('FeedService',function($http) {
                 //console.log(res);
  //                   $scope.xmlfeed = res;
                     var jsonfeed = xml2json.parseTheXml(res.data);
+                    console.log('jsonfeed is: ', jsonfeed);
                     return jsonfeed;
             } ); // get
 
