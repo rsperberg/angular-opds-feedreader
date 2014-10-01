@@ -106,7 +106,13 @@ function FeedCtrl($scope, $http, FeedService) {
         });
    }
 
+   function loadAndBuildSubFeed(e,category,label) {
+    var categoryUrl = 'http://www.feedbooks.com/store/top.atom?category=' + category;
+    loadSubFeed(e, categoryUrl,label);
+   }
+
    $scope.loadSubFeed = loadSubFeed;
+   $scope.loadAndBuildSubFeed = loadAndBuildSubFeed;
 
     function saveToLocalStorage(feeds) {
       // Put the object into storage

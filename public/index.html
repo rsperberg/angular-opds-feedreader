@@ -110,8 +110,9 @@
                                     <p class="text-left">{{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
                                     <p>
                                         <span class="titleText">Categories:&nbsp; &nbsp; </span>
-                                        <span data-ng-repeat="category in item.category">
-                                            <strong><a data-ng-href="{{category._attr.href}}" title="View more in this category">{{category._attr.label}}&nbsp; &nbsp;</a></strong>
+                                        <span data-ng-repeat="categ in item.category">
+                                            <a ng-href="" data-ng-click="loadAndBuildSubFeed(event,categ._attr.term,categ._attr.label)" title="View more in this category">{{categ._attr.label}}&nbsp; &nbsp;</a>
+                                            <!--  strong><a data-ng-click="loadSubFeed(e,'http://www.feedbooks.com/store/top.atom?category='category._attr.term,category._attr.label)" title="View more in this category">{{category._attr.label}}&nbsp; &nbsp;</a></strong  -->
                                         </span>
                                     </p>
                                     <div data-ng-repeat="entrylinks in item.link">
