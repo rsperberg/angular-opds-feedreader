@@ -60,7 +60,10 @@
 
         <div class="col-md-4">
             <ul class="unstyled">
-                <span class="badge badge-warning top-buffer" data-ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+                <!--  div data-ng-switch on="res.feed.opensearch%3AitemsPerPage._text">
+                    <span data-ng-switch-when="20" class="badge badge-warning top-buffer">{{(res.feed.opensearch%3AtotalResults._text}} Items</span>
+                    <span data-ng-switch-default class="badge badge-warning top-buffer" data-ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
+                    </div  -->
                 <span data-ng-repeat="link in links">
                     <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'" /><a ng-href="" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
                     <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'" /><a ng-href="" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
@@ -103,7 +106,14 @@
                                         <span class="titleText">{{item.title._text}}</span>
                                         <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                                     </h5>
+                                    <a data-ng-href="{{item.author.uri._text}}" title="View author page"><h5>{{item.author.name._text}}</h5></a>
                                     <p class="text-left">{{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
+                                    <p>
+                                        <span class="titleText">Categories:&nbsp; &nbsp; </span>
+                                        <span data-ng-repeat="category in item.category">
+                                            <strong><a data-ng-href="{{category._attr.href}}" title="View more in this category">{{category._attr.label}}&nbsp; &nbsp;</a></strong>
+                                        </span>
+                                    </p>
                                     <div data-ng-repeat="entrylinks in item.link">
                                         <p><a data-ng-if="entrylinks._attr.title === 'View on Feedbooks'" ng-href="{{entrylinks._attr.href}}" target="_blank"><span class="titleText" >View on Feedbooks</span></a></p>
                                     </div>
