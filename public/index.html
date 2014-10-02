@@ -98,12 +98,12 @@
                         </div>
                         <div data-ng-switch-default>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div data-ng-repeat="entrylinks in item.link">
                                         <img data-ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" data-ng-src="{{entrylinks._attr.href}}" />
                                     </div>
                                 </div>
-                                 <div class="col-md-10">
+                                 <div class="col-md-3">
                                     <h5>
                                         <span class="titleText">{{item.title._text}}</span>
                                         <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
@@ -113,7 +113,7 @@
                                     <p>
                                         <span class="titleText">Categories:&nbsp; &nbsp; </span>
                                         <span data-ng-repeat="categ in item.category">
-                                            <a ng-href="" data-ng-click="loadAndBuildSubFeed(event,categ._attr.term,categ._attr.label)" title="View more in this category">{{categ._attr.label}}&nbsp; &nbsp;</a>
+                                            <a ng-href="#" data-ng-click="loadAndBuildSubFeed(event,categ._attr.term,categ._attr.label)" title="View more in this category">{{categ._attr.label}}&nbsp; &nbsp;</a>
                                             <!--  strong><a data-ng-click="loadSubFeed(e,'http://www.feedbooks.com/store/top.atom?category='category._attr.term,category._attr.label)" title="View more in this category">{{category._attr.label}}&nbsp; &nbsp;</a></strong  -->
                                         </span>
                                     </p>
