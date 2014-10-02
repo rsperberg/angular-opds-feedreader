@@ -98,12 +98,12 @@
                         </div>
                         <div data-ng-switch-default>
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-sm-1">
                                     <div data-ng-repeat="entrylinks in item.link">
                                         <img data-ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" data-ng-src="{{entrylinks._attr.href}}" />
                                     </div>
                                 </div>
-                                 <div class="col-md-3">
+                                 <div class="col-sm-3">
                                     <h5>
                                         <span class="titleText">{{item.title._text}}</span>
                                         <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
