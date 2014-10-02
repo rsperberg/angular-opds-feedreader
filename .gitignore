@@ -2,7 +2,7 @@ node_modules
 public/main.js
 public/main.html
 notes
-public/js
+public/js/jLoader.js
 public/catalog.atom
 public/demo-mod.html
 notes.zip
