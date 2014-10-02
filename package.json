@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "express": "~4.9.x",
-    "feedr": "^2.10.3"
+    "feedr": "^2.10.3",
+    "xml2js": "^0.4.4"
   },
   "engines": {
     "node": "0.10.x"
