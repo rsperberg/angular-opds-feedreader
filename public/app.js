@@ -28,14 +28,23 @@ window.addEventListener('load', function() {
 
 var app = angular.module('FeedRead', ['ngTouch']);
 
+app.filter('decodeEntities', function () {
+  return function (item) {
+    return he.decode(item);
+  };
+});
+
 app.factory('FeedService',function($http) {
-    return {
+   return {
         parseOpdsFeed: function(feedUrl) {
                return  $http.get(feedUrl).then(function(res) {
-                //console.log(res);
+//                console.log('res.data is: ',res.data);
  //                   $scope.xmlfeed = res;
+ //                   var resDecoded = he.decode(res);
+ //                   var resDecoded = decodeHtml(res.data);
+ //                   console.log('resDecoded is: ',resDecoded);
                     var jsonfeed = xml2json.parseTheXml(res.data);
-                    console.log('jsonfeed is: ', jsonfeed);
+ //                   console.log('jsonfeed is: ', jsonfeed);
                     return jsonfeed;
             } ); // get
 
@@ -80,8 +89,11 @@ function FeedCtrl($scope, $http, FeedService) {
             $scope.currentButtonText = angular.element(e.target).text();
             $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
             $scope.images = res.feed.entry.link;
+            $scope.links = res.feed.link;
+//            $scope.summary = res.feed.entry.summary._text;
+//            $scope.content = he.decode(res.feed.entry.content);
             console.log('$scope.feeds is: ', $scope.feeds);
-            console.log('$scope.images is: ', $scope.images);
+            console.log('$scope.links is: ', $scope.links);
         });
     };
     $scope.clearText = function() {
@@ -100,9 +112,12 @@ function FeedCtrl($scope, $http, FeedService) {
             $scope.main = res.feed;
             $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
             $scope.images = res.feed.entry.link;
+//            $scope.summary = res.feed.entry.summary._text;
+//            $scope.content = he.decode(res.feed.entry.content);
             $scope.links = res.feed.link;
             console.log('$scope.feeds is: ', $scope.feeds);
             console.log('$scope.images is: ', $scope.images);
+            console.log('$scope.links is: ', $scope.links);
         });
    }
 
@@ -150,7 +165,10 @@ function FeedCtrl($scope, $http, FeedService) {
             {titleText:'FeedBooks Non-fiction',url:'http://www.feedbooks.com/store/categories/FBNFC000000.atom'},
             {titleText:'FeedBooks Free Books',url:'http://www.feedbooks.com/site/free_books.atom'},
             {titleText:'FeedBooks Bestsellers',url:'http://www.feedbooks.com/store/top.atom'},
-            {titleText:'FeedBooks New Releases',url:'http://www.feedbooks.com/store/recent.atom'}
+            {titleText:'FeedBooks New Releases',url:'http://www.feedbooks.com/store/recent.atom'},
+            {titleText:'Internet Archive',url:'http://bookserver.archive.org/catalog/catalog.atom'},
+            {titleText:'O\'Reilly',url:'http://opds.oreilly.com/opds/'},
+            {titleText:'The Pragmatic Bookshelf',url:'https://pragprog.com/catalog.opds'}
             ];
     }
     $scope.removeAllFeedsFromLocalStorage = removeAllFeedsFromLocalStorage;

@@ -16,7 +16,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-    <!--  script src="js/jLoader.js"  type="text/javascript"></script  -->
+    <script src="/js/he.js"></script>
     <script src="/js/xml2json.js"  type="text/javascript"></script>
    <link rel="icon" href="/favicon.ico" />
 </head>
@@ -33,7 +33,7 @@
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">{{currentButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li data-ng-repeat="item in allFeeds"><span ng-href="#" dropdown-toggle data-ng-click="$parent.loadFeed($event,item.url);">{{item.titleText}}</span></li>
+                                <li data-ng-repeat="item in allFeeds"><span ng-href="#" dropdown-toggle data-ng-click="$parent.loadFeed($event,item.url);">{{item.titleText | decodeEntities }}</span></li>
                             </ul>
                         </div> <!-- input-group-btn  -->
                         <div class="input-group-btn">
@@ -76,25 +76,25 @@
                     <div data-ng-switch on="item.link._attr.rel"> <!-- do not give space to image for links to subsection listings  -->
                         <div data-ng-switch-when="http://opds-spec.org/sort/popular"> <!-- best sellers  -->
                             <h5>
-                                <a ng-href="#" data-ng-click="loadSubFeed(event,item.link._attr.href,item.title._text)"><span class="titleText" >{{item.title._text}}</span></a>
+                                <a ng-href="#" data-ng-click="loadSubFeed(event,item.link._attr.href,item.title._text)"><span class="titleText" >{{item.title._text | decodeEntities }}</span></a>
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
-                            <p class="text-left">{{item.content._text}}</p>
+                            <p class="text-left">{{item.content._text | decodeEntities }}</p>
                         </div>
                         <div data-ng-switch-when="http://opds-spec.org/sort/new">  <!--  New releases -->
                             <h5>
-                                <a ng-href="#" data-ng-click="loadSubFeed(event,item.id._text, item.title._text)"><span class="titleText">{{item.title._text}}</span></a>
+                                <a ng-href="#" data-ng-click="loadSubFeed(event,item.id._text, item.title._text)"><span class="titleText">{{item.title._text | decodeEntities }}</span></a>
                                 <!--  a ng-href="{{item.id._text}}" target="_blank"><span class="titleText" >{{item.title._text}}</span></a  -->
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
-                            <p class="text-left">{{item.content._text}}</p>
+                            <p class="text-left">{{item.content._text | decodeEntities }}</p>
                         </div>
                         <div data-ng-switch-when="subsection">
                             <h5>
-                                <a ng-href="#" data-ng-click="loadSubFeed(event,item.link._attr.href, item.title._text)"><span class="titleText">{{item.title._text}}</span></a>
+                                <a ng-href="#" data-ng-click="loadSubFeed(event,item.link._attr.href, item.title._text)"><span class="titleText">{{item.title._text | decodeEntities }}</span></a>
                                 <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                             </h5>
-                            <p class="text-left">{{item.content._text}} </p>
+                            <p class="text-left">{{item.content._text | decodeEntities }} </p>
                         </div>
                         <div data-ng-switch-default>
                             <div class="row">
@@ -105,11 +105,11 @@
                                 </div>
                                  <div class="col-sm-10">
                                     <h5>
-                                        <span class="titleText">{{item.title._text}}</span>
+                                        <span class="titleText">{{item.title._text | decodeEntities }}</span>
                                         <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
                                     </h5>
-                                    <a data-ng-href="{{item.author.uri._text}}" title="View author page" target="_blank"><h5>{{item.author.name._text}}</h5></a>
-                                    <p class="text-left">{{item.summary._text}}</p><!-- feed uses 'content' book description uses 'summary' -->
+                                    <a data-ng-href="{{item.author.uri._text}}" title="View author page" target="_blank"><h5>{{item.author.name._text | decodeEntities }}</h5></a>
+                                    <p class="text-left">{{item.summary._text | decodeEntities }}</p><!-- feed uses 'content' book description uses 'summary' -->
                                     <p>
                                         <span class="titleText">Categories:&nbsp; &nbsp; </span>
                                         <span data-ng-repeat="categ in item.category">
