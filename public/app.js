@@ -38,6 +38,7 @@ app.factory('FeedService',function($http) {
    return {
         parseOpdsFeed: function(feedUrl) {
                return  $http.get(feedUrl).then(function(res) {
+                console.log('res is: ',res);
 //                console.log('res.data is: ',res.data);
  //                   $scope.xmlfeed = res;
  //                   var resDecoded = he.decode(res);
