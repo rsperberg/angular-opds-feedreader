@@ -48,10 +48,6 @@ app.factory('FeedService',function($http) {
  //                   console.log('jsonfeed is: ', jsonfeed);
                     return jsonfeed;
             } ); // get
-
-//            console.log($http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)) );
-//            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
-
         }  // parseOpdsFeed
     };  // return
 });  // app.factory
@@ -89,7 +85,7 @@ function FeedCtrl($scope, $http, FeedService) {
             console.log('res from parseOpdsFeed is: ', res)
             $scope.currentButtonText = angular.element(e.target).text();
             $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
-            $scope.images = res.feed.entry.link;
+            $scope.images = res.feed.entry.link;   // this isn't going to work for ng-repeat within ng-repeat
             $scope.links = res.feed.link;
 //            $scope.summary = res.feed.entry.summary._text;
 //            $scope.content = he.decode(res.feed.entry.content);
@@ -113,7 +109,7 @@ function FeedCtrl($scope, $http, FeedService) {
             $scope.main = res.feed;
             $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
             $scope.images = res.feed.entry.link;
-//            $scope.summary = res.feed.entry.summary._text;
+//            $scope.summary = res.feed.entry.summary._text;    // this isn't going to work for ng-repeat within ng-repeat
 //            $scope.content = he.decode(res.feed.entry.content);
             $scope.links = res.feed.link;
             console.log('$scope.feeds is: ', $scope.feeds);
@@ -132,7 +128,6 @@ function FeedCtrl($scope, $http, FeedService) {
 
     function saveToLocalStorage(feeds) {
       // Put the object into storage
-
       localStorage.setItem('feeds', angular.toJson(feeds));
       console.log(angular.toJson(feeds));
       console.log('wrote feeds to localStorage');
