@@ -22,7 +22,7 @@
 </head>
 <body data-ng-app="FeedRead">
 
-    <div data-ng-controller="FeedCtrl">
+    <div data-ng-controller="FeedCtrl" class="container">
         <h4>OPDS Catalog Reader using AngularJS</h4>
 
         <form class="form-horizontal col-md-12" role="form">
@@ -66,11 +66,12 @@
                     <span data-ng-switch-when="20" class="badge badge-warning top-buffer">{{(res.feed.opensearch%3AtotalResults._text}} Items</span>
                     <span data-ng-switch-default class="badge badge-warning top-buffer" data-ng-show="feeds.length > 0">{{(feeds | filter:filterText).length}} Items</span>
                     </div  -->
-                <span data-ng-repeat="link in links">
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'" /><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'" /><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
-                </span>
-
+                <li>
+                    <span data-ng-repeat="link in links">
+                        <a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink"><span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'">{{link._attr.title}}</span></a>
+                        <a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink"><span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'">{{link._attr.title}}</span></a>
+                    </span>
+                </li>
                 <li data-ng-repeat="item in feeds | filter:filterText" class="ruled">
 
                     <div data-ng-switch on="item.link._attr.rel"> <!-- do not give space to image for links to subsection listings  -->
@@ -98,12 +99,12 @@
                         </div>
                         <div data-ng-switch-default>
                             <div class="row">
-                                <div class="col-sm-2">
+                                <div class="col-md-2">
                                     <div data-ng-repeat="entrylinks in item.link">
                                         <img data-ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" data-ng-src="{{entrylinks._attr.href}}" />
                                     </div>
                                 </div>
-                                 <div class="col-sm-10">
+                                 <div class="col-md-10">
                                     <h5>
                                         <span class="titleText">{{item.title._text | decodeEntities }}</span>
                                         <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
@@ -126,12 +127,12 @@
                     </div>  <!--  on  -->
               </li>
             <span data-ng-repeat="link in links"> <!-- repeat next and previous page badges at bottom of list so you don't have to scroll to the top to get the next group -->
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'" /><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'" /><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'"><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'"><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
                 </span>
             </ul>
         </div> <!--  col-md-4  -->
-    </div>  <!--  data-ng-controller="FeedCtrl"  -->
+    </div>  <!--  data-ng-controller="FeedCtrl"  container -->
 
     <script src="app.js"></script>
 </body>
