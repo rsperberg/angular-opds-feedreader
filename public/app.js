@@ -164,7 +164,8 @@ function FeedCtrl($scope, $http, FeedService) {
             {titleText:'FeedBooks New Releases',url:'http://www.feedbooks.com/store/recent.atom'},
             {titleText:'Internet Archive',url:'http://bookserver.archive.org/catalog/catalog.atom'},
             {titleText:'O\'Reilly',url:'http://opds.oreilly.com/opds/'},
-            {titleText:'The Pragmatic Bookshelf',url:'https://pragprog.com/catalog.opds'}
+            {titleText:'The Pragmatic Bookshelf',url:'https://pragprog.com/catalog.opds'},
+            {titleText:'Project Gutenberg',url:'http://m.gutenberg.org/ebooks/?format=opds'}
             ];
     }
     $scope.removeAllFeedsFromLocalStorage = removeAllFeedsFromLocalStorage;
