@@ -27,7 +27,7 @@
         <!--  div class="container"  -->
         <form class="form-horizontal col-md-12" role="form">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-3">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="{{phMessage}}" data-ng-model="feedSrc" />
                         <div class="input-group-btn">
@@ -47,7 +47,7 @@
             </div> <!--  row  -->
 
             <div class = "row top-buffer">
-                <div class="col-md-4" ng-show="feeds.length > 0">
+                <div class="col-md-4 col-sm-3" ng-show="feeds.length > 0">
                     <div class="input-group">
                         <input class="form-control col-md-8" type="text" placeholder="Search" data-ng-model="filterText" />
                         <div class="input-group-btn">
@@ -61,7 +61,7 @@
         </form>
 
         <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-3">
             <ul class="unstyled">
                 <!--  div data-ng-switch on="res.feed.opensearch%3AitemsPerPage._text">
                     <span data-ng-switch-when="20" class="badge badge-warning top-buffer">{{(res.feed.opensearch%3AtotalResults._text}} Items</span>
@@ -100,12 +100,12 @@
                         </div>
                         <div data-ng-switch-default>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-sm-3">
                                     <div data-ng-repeat="entrylinks in item.link">
                                         <img data-ng-if="entrylinks._attr.rel === 'http://opds-spec.org/image/thumbnail'" data-ng-src="{{entrylinks._attr.href}}" />
                                     </div>
                                 </div>
-                                 <div class="col-md-9">
+                                 <div class="col-md-9 col-sm-9">
                                     <h5>
                                         <span class="titleText">{{item.title._text | decodeEntities }}</span>
                                         <span class="small">&nbsp;&nbsp;&nbsp;&nbsp;{{item.updated._text | date:'MMMM yyyy'}}</span>
