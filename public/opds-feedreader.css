@@ -15,7 +15,7 @@
 
 h4 { margin-left:15px;font-family: Share, arial; /* background-color:lightblue; */}
 
-.top-buffer { margin-top:5px; }
+.top-buffer { margin-top:8px; }
 
 li.ruled { margin-top: 6pt; border-top: 1px solid #d8d8ff;}
 
@@ -44,4 +44,6 @@ img { padding-top: 6pt;}
 [ng-click], [data-ng-click], [x-ng-click], [data-ng-href] { cursor: pointer; }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.bottom-buffer { margin-bottom: 12px; }
 

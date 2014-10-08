@@ -133,8 +133,8 @@
                     </div>  <!--  on  -->
               </li>
             <span data-ng-repeat="link in links"> <!-- repeat next and previous page badges at bottom of list so you don't have to scroll to the top to get the next group -->
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'previous'"><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
-                    <span class="badge badge-warning top-buffer badgelink" data-ng-if="link._attr.rel === 'next'"><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink bottom-buffer" data-ng-if="link._attr.rel === 'previous'"><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
+                    <span class="badge badge-warning top-buffer badgelink bottom-buffer" data-ng-if="link._attr.rel === 'next'"><a ng-href="#" data-ng-click="loadSubFeed(event,link._attr.href,main.title._text)" class="badgelink">{{link._attr.title}}</a></span>
                 </span>
             </ul>
         </div> <!--  col-md-6  -->
