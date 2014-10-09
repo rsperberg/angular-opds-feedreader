@@ -33,7 +33,7 @@
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">{{currentButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li class="dropdown" data-ng-repeat="item in allFeeds" ng-href="#" dropdown-toggle data-ng-click="$parent.loadFeed($event,item.url);">{{item.titleText | decodeEntities }}</li>
+                                <li class="dropdown" data-ng-repeat="item in allFeeds" dropdown-toggle  ng-href="#" data-ng-class="{ open : isDropDownCollapsed}" data-ng-init="isDropDownCollapsed = false" data-ng-click="isDropDownCollapsed = !isDropDownCollapsed; $parent.loadFeed($event,item.url);">{{item.titleText | decodeEntities }}</li>
                             </ul>
                         </div> <!-- input-group-btn  -->
                         <div class="input-group-btn">
