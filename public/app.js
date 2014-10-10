@@ -82,7 +82,7 @@ function FeedCtrl($scope, $http, FeedService) {
         console.log(url);
 
         FeedService.parseOpdsFeed(url).then(function(res) {
-            console.log('res from parseOpdsFeed is: ', res)
+            console.log('res from parseOpdsFeed is: ', res);
             $scope.currentButtonText = angular.element(e.target).text();
             $scope.feeds = res.feed.entry;//res.data.responseData.feed.entries;
             $scope.images = res.feed.entry.link;   // this isn't going to work for ng-repeat within ng-repeat
@@ -103,7 +103,7 @@ function FeedCtrl($scope, $http, FeedService) {
         $scope.feedSrc = url;
         //console.log(url);
         FeedService.parseOpdsFeed(url).then(function(res) {
-            console.log('res from parseOpdsFeed is: ', res)
+            console.log('res from parseOpdsFeed is: ', res);
             $scope.currentButtonText = res.feed.title._text;
  //           $scope.currentButtonText = subFeedTitle;
             $scope.main = res.feed;
