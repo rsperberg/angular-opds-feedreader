@@ -1,6 +1,5 @@
 // app.js
 // {titleText:'',url:''}
-require('newrelic');
 require('feedr');
 var feedr = require('feedr').create({  /* optional configuration */  });
 var app = angular.module('FeedRead', []);
