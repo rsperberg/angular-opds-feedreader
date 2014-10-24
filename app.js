@@ -1,4 +1,3 @@
-require('newrelic');
 // app.js
 // {titleText:'',url:''}
 require('feedr');
