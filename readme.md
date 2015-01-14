@@ -4,4 +4,4 @@ OPDS — the Open Publication Distribution System — is an Atom-based feed that
 
 This app was built using the AngularJS JavaScript framework and includes the core feeds of the web's largest free e-book publisher, Feedbooks. The app makes use of Bootstrap's responsive design so that the layout adjusts appropriately to tablets (ideal for reading), mobile phones, and laptop and desktop screens.
 
-To see a demo, go to <a href="jttp://angular-opds-feedreader.heroku.com" title="link to working demo">angular-opds-feedreader.heroku.com</a>.
+To see a demo, go to <a href="http://angular-opds-feedreader.heroku.com" title="link to working demo">angular-opds-feedreader.heroku.com</a>.
