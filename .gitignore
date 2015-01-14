@@ -6,3 +6,5 @@ public/js/jLoader.js
 public/catalog.atom
 public/demo-mod.html
 notes.zip
+public/samples/*.atom
+public/samples/*.opds
