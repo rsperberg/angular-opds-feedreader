@@ -27,7 +27,7 @@ window.addEventListener('load', function() {
 }, false);
 
 var app = angular.module('FeedRead', ['ngTouch']);
-
+//  takes encoded entities and converts them to the character the entity represents
 app.filter('decodeEntities', function () {
   return function (item) {
     return he.decode(item);
